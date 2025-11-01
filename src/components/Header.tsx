@@ -1,5 +1,6 @@
 import { Phone, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import revelroLogo from '../assets/Revelro_Logo.png';
 
 interface HeaderProps {
   currentPage: string;
@@ -12,37 +13,38 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
-    { id: 'equipment', label: 'Equipment' },
-    { id: 'process', label: 'Process' },
     { id: 'about', label: 'About Us' },
     { id: 'contact', label: 'Contact' },
   ];
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex items-center cursor-pointer" onClick={() => onNavigate('home')}>
-            <div className="text-2xl font-bold text-blue-600">Revelro Cars</div>
+        <div className="flex items-center justify-between h-24">
+          <div className="flex items-center cursor-pointer group" onClick={() => onNavigate('home')}>
+            <img src={revelroLogo} alt="Revelro Cars" className="h-36 w-auto transition-transform duration-300 group-hover:scale-105" />
           </div>
 
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium ${
-                  currentPage === item.id ? 'text-blue-600' : ''
+                className={`px-4 py-2 rounded-lg text-gray-700 hover:text-brand-burgundy hover:bg-brand-burgundy/5 transition-all duration-200 font-medium relative ${
+                  currentPage === item.id ? 'text-brand-burgundy bg-brand-burgundy/5' : ''
                 }`}
               >
                 {item.label}
+                {currentPage === item.id && (
+                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-brand-burgundy rounded-full"></span>
+                )}
               </button>
             ))}
           </nav>
 
           <a
             href="tel:+919891111747"
-            className="hidden md:flex items-center gap-2 bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold"
+            className="hidden md:flex items-center gap-2 bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-brand-burgundy/30 transform hover:-translate-y-0.5"
           >
             <Phone size={20} />
             +91 989 1111 747
@@ -57,8 +59,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden py-4 border-t border-gray-100 bg-white/95 backdrop-blur-md">
+            <nav className="flex flex-col space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -66,8 +68,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     onNavigate(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left text-gray-700 hover:text-blue-600 transition-colors font-medium px-4 py-2 ${
-                    currentPage === item.id ? 'text-blue-600 bg-blue-50' : ''
+                  className={`text-left text-gray-700 hover:text-brand-burgundy hover:bg-brand-burgundy/5 transition-all duration-200 font-medium px-4 py-3 rounded-lg mx-2 ${
+                    currentPage === item.id ? 'text-brand-burgundy bg-brand-burgundy/5' : ''
                   }`}
                 >
                   {item.label}
@@ -75,7 +77,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               ))}
               <a
                 href="tel:+919891111747"
-                className="flex items-center gap-2 bg-orange-500 text-white px-4 py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold mx-4"
+                className="flex items-center gap-2 bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark text-white px-4 py-3 rounded-xl font-semibold mx-4 mt-2 shadow-md"
               >
                 <Phone size={20} />
                 +91 989 1111 747

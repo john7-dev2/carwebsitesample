@@ -10,6 +10,9 @@ export default function ContactPage() {
     message: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -18,61 +21,105 @@ export default function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: '',
-    });
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      // Prepare WhatsApp message
+      const whatsappNumber = '917840869888'; // Number with country code, no + or spaces
+      let message = `*New Contact Form Submission*\n\n`;
+      message += `*Name:* ${formData.name}\n`;
+      message += `*Email:* ${formData.email}\n`;
+      if (formData.phone) {
+        message += `*Phone:* ${formData.phone}\n`;
+      }
+      if (formData.service) {
+        message += `*Service Interested:* ${formData.service}\n`;
+      }
+      message += `\n*Message:*\n${formData.message}`;
+
+      // Encode the message for URL
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Open WhatsApp with pre-filled message
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      window.open(whatsappUrl, '_blank');
+
+      // Also submit to backend for record keeping
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      if (supabaseUrl && supabaseAnonKey) {
+        const apiUrl = `${supabaseUrl}/functions/v1/submit-contact-form`;
+        await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${supabaseAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }).catch(err => console.error('Backend submission error:', err));
+      }
+
+      alert('Opening WhatsApp to send your message. Please click Send in WhatsApp to complete your submission.');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to submit form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
     {
-      icon: <MapPin className="w-6 h-6 text-orange-500" />,
+      icon: <MapPin className="w-6 h-6 text-brand-burgundy" />,
       title: 'Our Location',
-      details: '123 Auto Street, Mumbai, Maharashtra 400001',
+      details: '311, 3rd Floor, Downtown Mall, Sarojini Nagar, New Delhi - 110023',
     },
     {
-      icon: <Mail className="w-6 h-6 text-orange-500" />,
+      icon: <Mail className="w-6 h-6 text-brand-burgundy" />,
       title: 'Email Us',
-      details: 'info@revelrocars.com',
+      details: 'rohan@revelro.in',
     },
     {
-      icon: <Phone className="w-6 h-6 text-orange-500" />,
+      icon: <Phone className="w-6 h-6 text-brand-burgundy" />,
       title: 'Call Us',
       details: '+91 989 1111 747',
     },
     {
-      icon: <Clock className="w-6 h-6 text-orange-500" />,
-      title: 'Working Hours',
-      details: 'Mon - Sat: 9:00 AM - 7:00 PM',
+      icon: <Clock className="w-6 h-6 text-brand-burgundy" />,
+      title: 'Website',
+      details: 'www.revelro.in',
     },
   ];
 
   const services = [
-    'Exterior Detailing',
-    'Interior Detailing',
-    'Ceramic Coating',
-    'Paint Correction',
-    'Full Detailing Package',
+    'Light Package - ₹2,999',
+    'Elite Package - ₹4,999',
+    'Ultimate Package - ₹7,999',
+    'Supreme Package - ₹10,999',
+    'Service History Check',
     'Other',
   ];
 
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gray-900 text-white py-16">
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Have questions or ready to book an appointment? We'd love to hear from you.
+          <span className="inline-block mb-4 px-4 py-2 bg-brand-burgundy/20 backdrop-blur-sm border border-brand-burgundy/30 rounded-full text-brand-burgundy-light font-semibold text-sm tracking-wider uppercase">Get In Touch</span>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">Contact Us</h1>
+          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Ready to book a pre-owned car inspection? Have questions? We're here to help.
           </p>
         </div>
       </div>
@@ -81,11 +128,17 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-white p-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
+          <div className="bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Send us a Message</h2>
+            {submitError && (
+              <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6">
+                <p className="font-semibold">Error:</p>
+                <p>{submitError}</p>
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
                   Full Name *
                 </label>
                 <input
@@ -94,14 +147,15 @@ export default function ContactPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none"
                   required
+                  placeholder="John Doe"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                     Email Address *
                   </label>
                   <input
@@ -110,12 +164,13 @@ export default function ContactPage() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none"
                     required
+                    placeholder="john@example.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
                     Phone Number
                   </label>
                   <input
@@ -124,13 +179,14 @@ export default function ContactPage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none"
+                    placeholder="+91 98911 11747"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
                   Service Interested In
                 </label>
                 <select
@@ -138,7 +194,7 @@ export default function ContactPage() {
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none bg-white"
                 >
                   <option value="">Select a service</option>
                   {services.map((service, index) => (
@@ -150,7 +206,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
                   Your Message *
                 </label>
                 <textarea
@@ -159,58 +215,72 @@ export default function ContactPage() {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none resize-none"
                   required
+                  placeholder="Tell us about the car you want to inspect and which package you're interested in..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-md font-medium flex items-center justify-center space-x-2 transition-colors"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-brand-burgundy/30 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                <Send className="w-5 h-5" />
-                <span>Send Message</span>
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    <span>Send Message</span>
+                  </>
+                )}
               </button>
             </form>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-            <p className="text-gray-600 mb-8">
-              Have questions about our services or want to schedule an appointment? Fill out the form or contact us directly using the information below.
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Get in Touch</h2>
+            <p className="text-gray-600 mb-10 text-lg leading-relaxed">
+              Want to schedule an inspection or have questions about our packages? Fill out the form or contact us directly using the information below.
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-5">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 mt-1">
+                <div key={index} className="flex items-start space-x-4 p-5 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-100 hover:shadow-md transition-all duration-200">
+                  <div className="flex-shrink-0 mt-1 p-3 bg-brand-burgundy/10 rounded-lg">
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">{item.title}</h3>
+                    <h3 className="font-bold text-gray-900 mb-1">{item.title}</h3>
                     <p className="text-gray-600">{item.details}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 bg-orange-50 p-6 rounded-lg">
-              <h3 className="font-semibold text-lg mb-3">Business Hours</h3>
-              <ul className="space-y-2">
-                <li className="flex justify-between">
-                  <span className="text-gray-600">Monday - Friday</span>
-                  <span className="font-medium">9:00 AM - 7:00 PM</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="text-gray-600">Saturday</span>
-                  <span className="font-medium">10:00 AM - 5:00 PM</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="text-gray-600">Sunday</span>
-                  <span className="font-medium">Closed</span>
-                </li>
-              </ul>
+            <div className="mt-12 bg-gradient-to-br from-brand-burgundy/5 to-brand-burgundy/10 p-8 rounded-2xl border border-brand-burgundy/20 shadow-lg">
+              <h3 className="font-bold text-xl mb-5 text-gray-900">Company Information</h3>
+              <div className="space-y-3">
+                <div className="py-2">
+                  <span className="text-gray-700 font-medium block mb-1">Company Name</span>
+                  <span className="font-bold text-gray-900">Revelro Cars Private Limited</span>
+                </div>
+                <div className="py-2 border-t border-brand-burgundy/20">
+                  <span className="text-gray-700 font-medium block mb-1">Tagline</span>
+                  <span className="font-bold text-gray-900">Quality, Efficiency, Reliability and Satisfaction</span>
+                </div>
+                <div className="py-2 border-t border-brand-burgundy/20">
+                  <span className="text-gray-700 font-medium block mb-1">Service Coverage</span>
+                  <span className="font-bold text-gray-900">Service records for almost all brands in India</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

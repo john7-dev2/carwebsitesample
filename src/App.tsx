@@ -3,8 +3,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
-import EquipmentPage from './pages/EquipmentPage';
-import ProcessPage from './pages/ProcessPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
@@ -22,10 +20,6 @@ function App() {
         return <HomePage onNavigate={handleNavigate} />;
       case 'services':
         return <ServicesPage onNavigate={handleNavigate} />;
-      case 'equipment':
-        return <EquipmentPage />;
-      case 'process':
-        return <ProcessPage onNavigate={handleNavigate} />;
       case 'about':
         return <AboutPage onNavigate={handleNavigate} />;
       case 'contact':
