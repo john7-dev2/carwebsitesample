@@ -28,7 +28,7 @@ export default function ContactPage() {
 
     try {
       // Prepare WhatsApp message
-      const whatsappNumber = '917840869888'; // Number with country code, no + or spaces
+      const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '917840869888'; // Number with country code, no + or spaces
       let message = `*New Contact Form Submission*\n\n`;
       message += `*Name:* ${formData.name}\n`;
       message += `*Email:* ${formData.email}\n`;
@@ -114,29 +114,29 @@ export default function ContactPage() {
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20">
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 text-center">
-          <span className="inline-block mb-4 px-4 py-2 bg-brand-burgundy/20 backdrop-blur-sm border border-brand-burgundy/30 rounded-full text-brand-burgundy-light font-semibold text-sm tracking-wider uppercase">Get In Touch</span>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Contact Us</h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <span className="inline-block mb-3 md:mb-4 px-3 md:px-4 py-2 bg-brand-burgundy/20 backdrop-blur-sm border border-brand-burgundy/30 rounded-full text-brand-burgundy-light font-semibold text-xs sm:text-sm tracking-wider uppercase">Get In Touch</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 px-2">Contact Us</h1>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
             Ready to book a pre-owned car inspection? Have questions? We're here to help.
           </p>
         </div>
       </div>
 
       {/* Contact Content */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 gap-12">
+      <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Form */}
-          <div className="bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">Send us a Message</h2>
+          <div className="bg-white p-6 sm:p-8 md:p-10 rounded-xl md:rounded-2xl shadow-xl border border-gray-100">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-gray-900">Send us a Message</h2>
             {submitError && (
               <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6">
                 <p className="font-semibold">Error:</p>
                 <p>{submitError}</p>
               </div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
                   Full Name *
@@ -153,7 +153,7 @@ export default function ContactPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                     Email Address *
@@ -246,39 +246,39 @@ export default function ContactPage() {
 
           {/* Contact Info */}
           <div>
-            <h2 className="text-3xl font-bold mb-6 text-gray-900">Get in Touch</h2>
-            <p className="text-gray-600 mb-10 text-lg leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 text-gray-900">Get in Touch</h2>
+            <p className="text-gray-600 mb-6 md:mb-10 text-sm sm:text-base md:text-lg leading-relaxed">
               Want to schedule an inspection or have questions about our packages? Fill out the form or contact us directly using the information below.
             </p>
 
-            <div className="space-y-5">
+            <div className="space-y-3 md:space-y-5">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-start space-x-4 p-5 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-100 hover:shadow-md transition-all duration-200">
-                  <div className="flex-shrink-0 mt-1 p-3 bg-brand-burgundy/10 rounded-lg">
+                <div key={index} className="flex items-start space-x-3 md:space-x-4 p-4 md:p-5 bg-gradient-to-br from-gray-50 to-white rounded-lg md:rounded-xl border border-gray-100 hover:shadow-md transition-all duration-200">
+                  <div className="flex-shrink-0 mt-1 p-2 md:p-3 bg-brand-burgundy/10 rounded-lg">
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-1">{item.title}</h3>
-                    <p className="text-gray-600">{item.details}</p>
+                    <h3 className="font-bold text-sm md:text-base text-gray-900 mb-1">{item.title}</h3>
+                    <p className="text-xs sm:text-sm md:text-base text-gray-600">{item.details}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 bg-gradient-to-br from-brand-burgundy/5 to-brand-burgundy/10 p-8 rounded-2xl border border-brand-burgundy/20 shadow-lg">
-              <h3 className="font-bold text-xl mb-5 text-gray-900">Company Information</h3>
-              <div className="space-y-3">
+            <div className="mt-8 md:mt-12 bg-gradient-to-br from-brand-burgundy/5 to-brand-burgundy/10 p-6 md:p-8 rounded-xl md:rounded-2xl border border-brand-burgundy/20 shadow-lg">
+              <h3 className="font-bold text-lg md:text-xl mb-4 md:mb-5 text-gray-900">Company Information</h3>
+              <div className="space-y-2 md:space-y-3">
                 <div className="py-2">
-                  <span className="text-gray-700 font-medium block mb-1">Company Name</span>
-                  <span className="font-bold text-gray-900">Revelro Cars Private Limited</span>
+                  <span className="text-xs sm:text-sm text-gray-700 font-medium block mb-1">Company Name</span>
+                  <span className="text-sm sm:text-base font-bold text-gray-900">Revelro Cars Private Limited</span>
                 </div>
                 <div className="py-2 border-t border-brand-burgundy/20">
-                  <span className="text-gray-700 font-medium block mb-1">Tagline</span>
-                  <span className="font-bold text-gray-900">Quality, Efficiency, Reliability and Satisfaction</span>
+                  <span className="text-xs sm:text-sm text-gray-700 font-medium block mb-1">Tagline</span>
+                  <span className="text-sm sm:text-base font-bold text-gray-900">Quality, Efficiency, Reliability and Satisfaction</span>
                 </div>
                 <div className="py-2 border-t border-brand-burgundy/20">
-                  <span className="text-gray-700 font-medium block mb-1">Service Coverage</span>
-                  <span className="font-bold text-gray-900">Service records for almost all brands in India</span>
+                  <span className="text-xs sm:text-sm text-gray-700 font-medium block mb-1">Service Coverage</span>
+                  <span className="text-sm sm:text-base font-bold text-gray-900">Service records for almost all brands in India</span>
                 </div>
               </div>
             </div>

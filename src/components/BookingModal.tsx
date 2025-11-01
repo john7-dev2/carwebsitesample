@@ -62,7 +62,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
 
     try {
       // Prepare WhatsApp message
-      const whatsappNumber = '917840869888'; // Number with country code, no + or spaces
+      const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '917840869888'; // Number with country code, no + or spaces
       let message = `*New Appointment Booking*\n\n`;
       message += `*Customer Name:* ${formData.customer_name}\n`;
       message += `*Email:* ${formData.customer_email}\n`;
