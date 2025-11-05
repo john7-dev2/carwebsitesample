@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Phone, Mail, MapPin } from './icons';
 
 interface FooterProps {
   onNavigate: (page: string) => void;

@@ -1,4 +1,4 @@
-import { Phone, Menu, X } from 'lucide-react';
+import { Phone, Menu, X } from './icons';
 import { useState } from 'react';
 import revelroLogo from '../assets/Revelro_Logo.png';
 

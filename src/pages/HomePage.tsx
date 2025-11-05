@@ -1,5 +1,5 @@
 import heroImage from '../assets/ds-inventory-banner.jpg';
-import { Search, Settings, Shield, Crown, Plug, Ruler, Gauge, Camera, Battery, Thermometer, Eye, ClipboardList, Phone, Calendar, Wrench, FileText, UserCheck, Cog, FileCheck, BookOpen, Package, CheckCircle } from 'lucide-react';
+import { Search, Settings, Shield, Crown, Plug, Ruler, Gauge, Camera, Battery, Thermometer, Eye, ClipboardList, Phone, Calendar, Wrench, FileText, UserCheck, Cog, FileCheck, BookOpen, Package, CheckCircle } from '../components/icons';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;

@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react';
+import { Check } from '../components/icons';
 
 interface AboutPageProps {
   onNavigate: (page: string) => void;

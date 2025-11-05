@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Calendar, Clock, Car, User, Mail, Phone, MessageSquare } from 'lucide-react';
+import { X, Calendar, Clock, Car, User, Mail, Phone, MessageSquare } from './icons';
 
 interface BookingModalProps {
   isOpen: boolean;
