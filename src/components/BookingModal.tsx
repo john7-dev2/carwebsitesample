@@ -62,7 +62,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
 
     try {
       // Prepare WhatsApp message
-      const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '917840869888'; // Number with country code, no + or spaces
+      const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '919891111747'; // Number with country code, no + or spaces
       let message = `*New Appointment Booking*\n\n`;
       message += `*Customer Name:* ${formData.customer_name}\n`;
       message += `*Email:* ${formData.customer_email}\n`;
@@ -135,7 +135,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-brand-cream rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark text-white p-6 rounded-t-2xl flex items-center justify-between">
           <div>
@@ -299,7 +299,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
                 name="service_type"
                 value={formData.service_type}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none bg-white"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none bg-brand-cream"
                 required
               >
                 <option value="">Select a service</option>
@@ -338,7 +338,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
                   name="preferred_time"
                   value={formData.preferred_time}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none bg-white"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none bg-brand-cream"
                   required
                 >
                   <option value="">Select a time</option>

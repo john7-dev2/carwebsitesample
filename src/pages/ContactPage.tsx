@@ -112,7 +112,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-brand-cream-dark">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 text-center">
@@ -128,7 +128,7 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Form */}
-          <div className="bg-white p-6 sm:p-8 md:p-10 rounded-xl md:rounded-2xl shadow-xl border border-gray-100">
+          <div className="bg-brand-cream p-6 sm:p-8 md:p-10 rounded-xl md:rounded-2xl shadow-xl border border-gray-200">
             <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-gray-900">Send us a Message</h2>
             {submitError && (
               <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6">
@@ -194,7 +194,7 @@ export default function ContactPage() {
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none bg-white"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none bg-brand-cream"
                 >
                   <option value="">Select a service</option>
                   {services.map((service, index) => (
@@ -253,7 +253,7 @@ export default function ContactPage() {
 
             <div className="space-y-3 md:space-y-5">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-start space-x-3 md:space-x-4 p-4 md:p-5 bg-gradient-to-br from-gray-50 to-white rounded-lg md:rounded-xl border border-gray-100 hover:shadow-md transition-all duration-200">
+                <div key={index} className="flex items-start space-x-3 md:space-x-4 p-4 md:p-5 bg-gradient-to-br from-brand-cream-dark to-brand-cream rounded-lg md:rounded-xl border border-gray-200 hover:shadow-md transition-all duration-200">
                   <div className="flex-shrink-0 mt-1 p-2 md:p-3 bg-brand-burgundy/10 rounded-lg">
                     {item.icon}
                   </div>

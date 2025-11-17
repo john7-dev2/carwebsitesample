@@ -1,10 +1,7 @@
 import { Phone, Mail, MapPin } from './icons';
+import { Link } from 'react-router-dom';
 
-interface FooterProps {
-  onNavigate: (page: string) => void;
-}
-
-export default function Footer({ onNavigate }: FooterProps) {
+export default function Footer() {
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 border-t border-gray-800">
       <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
@@ -31,36 +28,36 @@ export default function Footer({ onNavigate }: FooterProps) {
             <h4 className="text-white font-bold text-base md:text-lg mb-4 md:mb-6">Quick Links</h4>
             <ul className="space-y-2 md:space-y-3">
               <li>
-                <button
-                  onClick={() => onNavigate('home')}
+                <Link
+                  to="/"
                   className="hover:text-brand-burgundy-light transition-colors text-xs sm:text-sm hover:translate-x-1 inline-block transform duration-200"
                 >
                   → Home
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('services')}
+                <Link
+                  to="/services"
                   className="hover:text-brand-burgundy-light transition-colors text-xs sm:text-sm hover:translate-x-1 inline-block transform duration-200"
                 >
                   → Services
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('about')}
+                <Link
+                  to="/about"
                   className="hover:text-brand-burgundy-light transition-colors text-xs sm:text-sm hover:translate-x-1 inline-block transform duration-200"
                 >
                   → About Us
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('contact')}
+                <Link
+                  to="/contact"
                   className="hover:text-brand-burgundy-light transition-colors text-xs sm:text-sm hover:translate-x-1 inline-block transform duration-200"
                 >
                   → Contact
-                </button>
+                </Link>
               </li>
             </ul>
           </div>

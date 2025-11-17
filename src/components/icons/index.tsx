@@ -104,87 +104,121 @@ export const Linkedin: React.FC<IconProps> = (props) => (
   </IconWrapper>
 );
 
-// Service Icons
+// Service Icons - Premium Package Icons
 export const Search: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
+    <circle cx="11" cy="11" r="8" fill="currentColor" fillOpacity="0.2"></circle>
     <circle cx="11" cy="11" r="8"></circle>
-    <path d="m21 21-4.35-4.35"></path>
+    <path d="m21 21-4.35-4.35" strokeWidth="2.5"></path>
+    <circle cx="11" cy="11" r="3" fill="currentColor"></circle>
   </IconWrapper>
 );
 
 export const Settings: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <circle cx="12" cy="12" r="3"></circle>
-    <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H5m13.2 5.2l-4.2-4.2m0-6l4.2-4.2"></path>
+    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" fill="currentColor" fillOpacity="0.2"></path>
+    <circle cx="12" cy="12" r="3" fill="currentColor"></circle>
   </IconWrapper>
 );
 
 export const Shield: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" fillOpacity="0.2"></path>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2"></path>
+    <path d="M9 12l2 2 4-4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"></path>
   </IconWrapper>
 );
 
 export const Crown: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <path d="M2 19h20"></path>
-    <path d="m2 19 3-7 4 3 4-6 4 6 4-3 3 7"></path>
+    <path d="m2 19 3-7 4 3 4-6 4 6 4-3 3 7H2z" fill="currentColor" fillOpacity="0.2"></path>
+    <path d="M2 19h20" strokeWidth="2.5" strokeLinecap="round"></path>
+    <path d="m2 19 3-7 4 3 4-6 4 6 4-3 3 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
+    <circle cx="5" cy="12" r="1.5" fill="currentColor"></circle>
+    <circle cx="12" cy="6" r="1.5" fill="currentColor"></circle>
+    <circle cx="19" cy="12" r="1.5" fill="currentColor"></circle>
   </IconWrapper>
 );
 
-// Equipment Icons
+// Equipment Icons - Professional Diagnostic Tools
 export const Plug: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <path d="M12 2v4m-2-2v4m4-4v4m-6 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2zm4 12v4"></path>
+    <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" fillOpacity="0.1"></rect>
+    <path d="M12 2v4m-2-2v4m4-4v4" strokeWidth="2"></path>
+    <rect x="6" y="6" width="12" height="12" rx="2" strokeWidth="2"></rect>
+    <path d="M12 18v4" strokeWidth="2.5"></path>
+    <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+    <path d="M9 9l6 6m0-6l-6 6" strokeWidth="1.5" opacity="0.5"></path>
   </IconWrapper>
 );
 
 export const Ruler: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0z"></path>
-    <path d="m14.5 12.5 2-2m-4-4 2-2m-4 10 2-2m-4-4 2-2"></path>
+    <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0z" fill="currentColor" fillOpacity="0.1"></path>
+    <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0z" strokeWidth="2"></path>
+    <path d="m14.5 12.5 2-2m-4-4 2-2m-4 10 2-2m-4-4 2-2" strokeWidth="2"></path>
+    <circle cx="7" cy="7" r="1" fill="currentColor"></circle>
   </IconWrapper>
 );
 
 export const Gauge: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <path d="M12 2v4m-8 6H0m4.22-5.78L1.93 3.93M19.78 6.22l2.29-2.29M24 12h-4m-8 10v-6l-4-4"></path>
-    <circle cx="12" cy="12" r="10"></circle>
+    <circle cx="12" cy="12" r="10" fill="currentColor" fillOpacity="0.1"></circle>
+    <circle cx="12" cy="12" r="10" strokeWidth="2"></circle>
+    <path d="M12 6v2m6 4h2m-2.34-5.66l1.41-1.41M6.34 6.34L4.93 4.93M6 12H4" strokeWidth="2" strokeLinecap="round"></path>
+    <path d="M12 12l-3 3" strokeWidth="2.5" strokeLinecap="round"></path>
+    <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
   </IconWrapper>
 );
 
 export const Camera: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-    <circle cx="12" cy="13" r="4"></circle>
+    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" fill="currentColor" fillOpacity="0.1"></path>
+    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" strokeWidth="2"></path>
+    <circle cx="12" cy="13" r="4" fill="currentColor" fillOpacity="0.2"></circle>
+    <circle cx="12" cy="13" r="4" strokeWidth="2"></circle>
+    <circle cx="18" cy="9" r="1" fill="currentColor"></circle>
   </IconWrapper>
 );
 
 export const Battery: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect>
-    <line x1="23" y1="13" x2="23" y2="11"></line>
+    <rect x="2" y="7" width="18" height="10" rx="2" fill="currentColor" fillOpacity="0.1"></rect>
+    <rect x="2" y="7" width="18" height="10" rx="2" strokeWidth="2"></rect>
+    <line x1="22" y1="10" x2="22" y2="14" strokeWidth="2.5" strokeLinecap="round"></line>
+    <path d="M6 12h8" strokeWidth="2" strokeLinecap="round"></path>
+    <path d="M10 8v8" strokeWidth="2" strokeLinecap="round"></path>
   </IconWrapper>
 );
 
 export const Thermometer: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" fill="currentColor" fillOpacity="0.1"></path>
+    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" strokeWidth="2"></path>
+    <circle cx="11.5" cy="18.5" r="2.5" fill="currentColor"></circle>
+    <path d="M11.5 4v11" strokeWidth="1.5" opacity="0.5"></path>
   </IconWrapper>
 );
 
 export const Eye: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-    <circle cx="12" cy="12" r="3"></circle>
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" fill="currentColor" fillOpacity="0.1"></path>
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" strokeWidth="2"></path>
+    <circle cx="12" cy="12" r="3" fill="currentColor" fillOpacity="0.2"></circle>
+    <circle cx="12" cy="12" r="3" strokeWidth="2"></circle>
+    <circle cx="12" cy="12" r="1" fill="currentColor"></circle>
   </IconWrapper>
 );
 
 export const ClipboardList: React.FC<IconProps> = (props) => (
   <IconWrapper {...props}>
-    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-    <path d="M12 11h4m-4 4h4m-6-4h.01M10 15h.01"></path>
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" fill="currentColor" fillOpacity="0.1"></path>
+    <rect x="8" y="2" width="8" height="4" rx="1" fill="currentColor" fillOpacity="0.2"></rect>
+    <rect x="8" y="2" width="8" height="4" rx="1" strokeWidth="2"></rect>
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" strokeWidth="2"></path>
+    <path d="M9 11h6m-6 4h6" strokeWidth="2" strokeLinecap="round"></path>
+    <circle cx="9" cy="11" r="1" fill="currentColor"></circle>
+    <circle cx="9" cy="15" r="1" fill="currentColor"></circle>
   </IconWrapper>
 );
 

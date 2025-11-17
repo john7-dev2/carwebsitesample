@@ -1,10 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { Check } from '../components/icons';
 
-interface AboutPageProps {
-  onNavigate: (page: string) => void;
-}
-
-export default function AboutPage({ onNavigate }: AboutPageProps) {
+export default function AboutPage() {
+  const navigate = useNavigate();
   const stats = [
     { value: '1000+', label: 'Cars Inspected' },
     { value: '98%', label: 'Customer Satisfaction' },
@@ -22,7 +20,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="bg-brand-cream">
       {/* Hero Section */}
       <section className="relative min-h-[50vh] md:h-96 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/60 z-10"></div>
@@ -36,7 +34,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
       {/* Our Story */}
-      <section className="py-12 md:py-16 lg:py-20 bg-white">
+      <section className="py-12 md:py-16 lg:py-20 bg-brand-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8 md:mb-12">
@@ -59,11 +57,11 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
       {/* Stats */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-12 md:py-16 lg:py-20">
+      <section className="bg-gradient-to-b from-brand-cream-dark to-brand-cream py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {stats.map((stat, index) => (
-              <div key={index} className="group p-4 sm:p-6 md:p-8 bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div key={index} className="group p-4 sm:p-6 md:p-8 bg-brand-cream rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-200">
                 <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark bg-clip-text text-transparent mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-300">{stat.value}</div>
                 <div className="text-xs sm:text-sm md:text-base text-gray-600 font-medium">{stat.label}</div>
               </div>
@@ -73,7 +71,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-12 md:py-16 lg:py-20 bg-white">
+      <section className="py-12 md:py-16 lg:py-20 bg-brand-cream">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8 md:mb-12">
@@ -82,7 +80,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
             </div>
             
             <div className="grid md:grid-cols-2 gap-6 md:gap-10">
-              <div className="bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 rounded-xl md:rounded-2xl border border-gray-100 shadow-lg">
+              <div className="bg-gradient-to-br from-brand-cream-dark to-brand-cream p-6 md:p-8 rounded-xl md:rounded-2xl border border-gray-200 shadow-lg">
                 <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-gray-900">Our Approach</h3>
                 <p className="text-sm md:text-base text-gray-700 mb-4 md:mb-6 leading-relaxed">
                   We use state-of-the-art diagnostic equipment and follow a systematic, multi-stage inspection process. Our goal is to provide you with a transparent, accurate, and confidence-boosting report before you commit to any purchase.
@@ -92,7 +90,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
                 </p>
               </div>
               
-              <div className="bg-gradient-to-br from-brand-burgundy/5 to-white p-6 md:p-8 rounded-xl md:rounded-2xl border border-brand-burgundy/20 shadow-lg">
+              <div className="bg-gradient-to-br from-brand-burgundy/5 to-brand-cream p-6 md:p-8 rounded-xl md:rounded-2xl border border-brand-burgundy/20 shadow-lg">
                 <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-900">Our Values</h3>
                 <ul className="space-y-3 md:space-y-4">
                   {features.map((feature, index) => (
@@ -113,13 +111,13 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       {/* CTA */}
       <section className="bg-gradient-to-br from-brand-burgundy/5 via-brand-burgundy/10 to-brand-burgundy/5 py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-3xl shadow-2xl border border-brand-burgundy/20">
+          <div className="max-w-3xl mx-auto bg-brand-cream/80 backdrop-blur-sm p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-3xl shadow-2xl border border-brand-burgundy/20">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-gray-900 px-2">Ready to Inspect Your Next Car?</h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-6 md:mb-10 leading-relaxed px-2">
               Book a professional inspection today and make your purchase with complete confidence.
             </p>
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => navigate('/contact')}
               className="bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white px-8 sm:px-10 md:px-12 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-brand-burgundy/30 transform hover:-translate-y-0.5 text-sm sm:text-base"
             >
               Contact Us Now

@@ -1,11 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BookingModal from '../components/BookingModal';
 
-interface ServicesPageProps {
-  onNavigate: (page: string) => void;
-}
-
-export default function ServicesPage({ onNavigate }: ServicesPageProps) {
+export default function ServicesPage() {
+  const navigate = useNavigate();
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
 
@@ -83,7 +81,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white">
+    <div className="bg-gradient-to-b from-brand-cream-dark to-brand-cream">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 text-center">
@@ -99,7 +97,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {services.map((service, idx) => (
-            <div key={service.id} className={`group relative bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 ${
+            <div key={service.id} className={`group relative bg-brand-cream rounded-xl md:rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 ${
               idx === 2 ? 'border-brand-burgundy lg:scale-105' : 'border-gray-100 hover:border-brand-burgundy/20'
             }`}>
               {idx === 2 && (
@@ -143,7 +141,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-gray-900 px-2">Not sure which package you need?</h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-6 md:mb-8 max-w-2xl mx-auto px-2">Contact us for expert guidance. We'll help you choose the perfect inspection package based on your needs and budget.</p>
           <button
-            onClick={() => onNavigate('contact')}
+            onClick={() => navigate('/contact')}
             className="bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-base"
           >
             Get Expert Guidance

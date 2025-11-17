@@ -9,6 +9,8 @@ export default {
           'burgundy': '#a41e3c',
           'burgundy-dark': '#8b1a32',
           'burgundy-light': '#c42a47',
+          'cream': '#fef9f3',
+          'cream-dark': '#fdf4e8',
         },
       },
     },

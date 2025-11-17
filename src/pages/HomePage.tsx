@@ -1,11 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import heroImage from '../assets/ds-inventory-banner.jpg';
 import { Search, Settings, Shield, Crown, Plug, Ruler, Gauge, Camera, Battery, Thermometer, Eye, ClipboardList, Phone, Calendar, Wrench, FileText, UserCheck, Cog, FileCheck, BookOpen, Package, CheckCircle } from '../components/icons';
 
-interface HomePageProps {
-  onNavigate: (page: string) => void;
-}
-
-export default function HomePage({ onNavigate }: HomePageProps) {
+export default function HomePage() {
+  const navigate = useNavigate();
   return (
     <div className="relative">
       {/* Hero Section */}
@@ -35,13 +33,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4">
             <button
-              onClick={() => onNavigate('services')}
+              onClick={() => navigate('/services')}
               className="bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-brand-burgundy/50 transform hover:-translate-y-0.5 text-sm sm:text-base"
             >
               View Inspection Packages
             </button>
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => navigate('/contact')}
               className="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-white/50 transform hover:-translate-y-0.5 text-sm sm:text-base"
             >
               Book Inspection
@@ -101,7 +99,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
           <div className="text-center mt-12">
             <button
-              onClick={() => onNavigate('services')}
+              onClick={() => navigate('/services')}
               className="inline-flex items-center gap-2 text-brand-burgundy font-semibold hover:gap-4 transition-all duration-300 text-lg group"
             >
               View All Packages
@@ -260,13 +258,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4">
               <button
-                onClick={() => onNavigate('contact')}
+                onClick={() => navigate('/contact')}
                 className="bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-brand-burgundy/50 transform hover:-translate-y-0.5 text-sm sm:text-base"
               >
                 Book Now
               </button>
               <button
-                onClick={() => onNavigate('services')}
+                onClick={() => navigate('/services')}
                 className="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-white/50 transform hover:-translate-y-0.5 text-sm sm:text-base"
               >
                 View Packages
