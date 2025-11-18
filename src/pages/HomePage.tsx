@@ -1,6 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import heroImage from '../assets/ds-inventory-banner.jpg';
-import { Search, Settings, Shield, Crown, Plug, Ruler, Gauge, Camera, Battery, Thermometer, Eye, ClipboardList, Phone, Calendar, Wrench, FileText, UserCheck, Cog, FileCheck, BookOpen, Package, CheckCircle } from '../components/icons';
+import { Phone, Calendar, Wrench, FileText, UserCheck, Cog, FileCheck, BookOpen, Package, CheckCircle } from '../components/icons';
+
+// Import package PNG icons
+import lightPackageIcon from '../assets/icons/light-package-icon.png';
+import elitePackageIcon from '../assets/icons/elite-package-icon.png';
+import ultimatePackageIcon from '../assets/icons/ultimate-package-icon.png';
+import supremePackageIcon from '../assets/icons/supreme-package-icon.png';
+
+// Import equipment PNG icons
+import obdScannerIcon from '../assets/icons/equipment-obd-scanner-icon.png';
+import paintGaugeIcon from '../assets/icons/equipment-paint-gauge-icon.png';
+import treadGaugeIcon from '../assets/icons/equipment-tread-gauge-icon.png';
+import endoscopyCameraIcon from '../assets/icons/equipment-endoscopy-camera-icon.png';
+import batteryTesterIcon from '../assets/icons/equipment-battery-tester-icon.png';
+import irThermometerIcon from '../assets/icons/equipment-ir-thermometer-icon.png';
+import underbodyMirrorIcon from '../assets/icons/equipment-underbody-mirror-icon.png';
+import vinToolsIcon from '../assets/icons/equipment-vin-tools-icon.png';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -61,35 +77,35 @@ export default function HomePage() {
               {
                 title: 'Light Package',
                 description: 'Quick essentials – Basic checks on exterior, tyres, battery, and odometer.',
-                Icon: Search,
+                iconSrc: lightPackageIcon,
                 gradient: 'from-blue-600 to-cyan-600',
                 price: '₹2,999',
               },
               {
                 title: 'Elite Package',
                 description: 'Smart coverage – Adds engine bay, brakes, suspension, and road test.',
-                Icon: Settings,
+                iconSrc: elitePackageIcon,
                 gradient: 'from-purple-600 to-pink-600',
                 price: '₹4,999',
               },
               {
                 title: 'Ultimate Package',
                 description: '100+ point inspection, OBD scan, underbody check, accident analysis.',
-                Icon: Shield,
+                iconSrc: ultimatePackageIcon,
                 gradient: 'from-orange-600 to-red-600',
                 price: '₹7,999',
               },
               {
                 title: 'Supreme Package',
                 description: 'Premium assurance with service history, document audit, and consultation.',
-                Icon: Crown,
+                iconSrc: supremePackageIcon,
                 gradient: 'from-emerald-600 to-green-600',
                 price: '₹10,999',
               },
             ].map((service, index) => (
               <div key={index} className="group bg-white p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                <div className={`w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                  <service.Icon className="text-white" size={28} strokeWidth={2} />
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md border border-gray-100 p-2">
+                  <img src={service.iconSrc} alt={service.title} className="w-full h-full object-contain drop-shadow-sm" />
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-gray-900">{service.title}</h3>
                 <div className="text-2xl md:text-3xl font-bold text-brand-burgundy mb-2 md:mb-3">{service.price}</div>
@@ -119,18 +135,18 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {[
-              { name: 'OBD-II Scanner', desc: 'Engine health & error codes', Icon: Plug },
-              { name: 'Paint Thickness Gauge', desc: 'Accident detection', Icon: Ruler },
-              { name: 'Tyre Tread Depth Gauge', desc: 'Tyre wear assessment', Icon: Gauge },
-              { name: 'Endoscopy Camera', desc: 'Hidden area inspection', Icon: Camera },
-              { name: 'Battery Tester', desc: 'Battery condition check', Icon: Battery },
-              { name: 'IR Thermometers', desc: 'Temperature diagnostics', Icon: Thermometer },
-              { name: 'Underbody Mirror', desc: 'Rust & leak detection', Icon: Eye },
-              { name: 'VIN Tools', desc: 'Service record verification', Icon: ClipboardList },
+              { name: 'OBD-II Scanner', desc: 'Engine health & error codes', iconSrc: obdScannerIcon },
+              { name: 'Paint Thickness Gauge', desc: 'Accident detection', iconSrc: paintGaugeIcon },
+              { name: 'Tyre Tread Depth Gauge', desc: 'Tyre wear assessment', iconSrc: treadGaugeIcon },
+              { name: 'Endoscopy Camera', desc: 'Hidden area inspection', iconSrc: endoscopyCameraIcon },
+              { name: 'Battery Tester', desc: 'Battery condition check', iconSrc: batteryTesterIcon },
+              { name: 'IR Thermometers', desc: 'Temperature diagnostics', iconSrc: irThermometerIcon },
+              { name: 'Underbody Mirror', desc: 'Rust & leak detection', iconSrc: underbodyMirrorIcon },
+              { name: 'VIN Tools', desc: 'Service record verification', iconSrc: vinToolsIcon },
             ].map((equipment, index) => (
               <div key={index} className="bg-gradient-to-br from-gray-50 to-white p-4 md:p-6 rounded-xl border border-gray-200 hover:border-brand-burgundy/30 hover:shadow-lg transition-all duration-300">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-burgundy/10 rounded-lg flex items-center justify-center mb-3">
-                  <equipment.Icon className="text-brand-burgundy" size={20} strokeWidth={2} />
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-lg flex items-center justify-center mb-3 p-3 shadow-sm border border-gray-100">
+                  <img src={equipment.iconSrc} alt={equipment.name} className="w-full h-full object-contain drop-shadow-sm" />
                 </div>
                 <h3 className="font-bold text-sm md:text-base text-gray-900 mb-2">{equipment.name}</h3>
                 <p className="text-xs md:text-sm text-gray-600">{equipment.desc}</p>
