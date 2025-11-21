@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import heroImage from '../assets/ds-inventory-banner.jpg';
-import { Phone, Calendar, Wrench, FileText, UserCheck, Cog, FileCheck, BookOpen, Package, CheckCircle } from '../components/icons';
+import { UserCheck, Wrench, FileCheck, BookOpen, Package, CheckCircle } from '../components/icons';
 
 // Import package PNG icons
 import lightPackageIcon from '../assets/icons/light-package-icon.png';
@@ -21,272 +22,335 @@ import vinToolsIcon from '../assets/icons/equipment-vin-tools-icon.png';
 export default function HomePage() {
   const navigate = useNavigate();
   return (
-    <div className="relative">
-      {/* Hero Section */}
-      <section className="relative min-h-[70vh] md:h-[90vh] flex items-center text-white overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/50 z-10"></div>
+    <div className="relative bg-white">
+      {/* Hero Section - Full Screen */}
+      <section className="relative h-screen flex items-center overflow-hidden">
+        {/* Background Image - Full Screen */}
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Luxury Car Inspection" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20"></div>
         </div>
-        <div className="container mx-auto px-4 z-20 text-center">
-          <div className="inline-block mb-4 px-3 py-2 bg-brand-burgundy/20 backdrop-blur-sm border border-brand-burgundy/30 rounded-full">
-            <span className="text-brand-burgundy-light font-semibold text-xs sm:text-sm tracking-wider uppercase">Quality, Efficiency, Reliability and Satisfaction</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Revelro Cars
-            </span>
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-10 max-w-3xl mx-auto text-gray-200 leading-relaxed px-2">
-            Expert Pre-Owned Car Inspection services. Complete clarity on a vehicle's condition before you make the commitment.
-          </p>
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4">
-            <button
-              onClick={() => navigate('/services')}
-              className="bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-brand-burgundy/50 transform hover:-translate-y-0.5 text-sm sm:text-base"
-            >
-              View Inspection Packages
-            </button>
-            <button
-              onClick={() => navigate('/contact')}
-              className="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-white/50 transform hover:-translate-y-0.5 text-sm sm:text-base"
-            >
-              Book Inspection
-            </button>
-          </div>
+
+        {/* Content */}
+        <div className="relative container mx-auto px-6 lg:px-12 z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl space-y-8"
+          >
+            <div className="inline-block">
+              <span className="text-brand-burgundy text-sm font-semibold tracking-[0.2em] uppercase">Premium Inspection</span>
+            </div>
+            
+            <h1 className="text-7xl lg:text-8xl xl:text-9xl font-bold text-white leading-[0.9] tracking-tight">
+              Revelro<br />Cars
+            </h1>
+            
+            <div className="w-24 h-1 bg-brand-burgundy"></div>
+            
+            <p className="text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-2xl">
+              Expert Pre-Owned Car Inspection. Complete clarity before commitment.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 pt-8">
+              <button
+                onClick={() => navigate('/services')}
+                className="bg-brand-burgundy text-white px-10 py-5 text-sm font-semibold tracking-wide uppercase hover:bg-brand-burgundy-dark transition-all duration-300"
+              >
+                View Packages
+              </button>
+              <button
+                onClick={() => navigate('/services')}
+                className="border-2 border-white text-white px-10 py-5 text-sm font-semibold tracking-wide uppercase hover:bg-white hover:text-brand-black transition-all duration-300"
+              >
+                Book Now
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section className="py-12 md:py-20 lg:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
-            <span className="text-brand-burgundy font-semibold text-xs sm:text-sm tracking-wider uppercase mb-3 block">What We Offer</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4 px-4">Inspection Packages</h2>
-            <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">Four different packages to choose from according to your needs</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {/* Inspection Packages - Minimal Grid */}
+      <section className="relative py-32 bg-white -mt-10 rounded-t-[50px]">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-20"
+          >
+            <span className="text-brand-burgundy text-sm font-semibold tracking-[0.2em] uppercase">Our Services</span>
+            <h2 className="text-5xl lg:text-6xl font-bold text-brand-black mt-4 mb-6 tracking-tight">Inspection Packages</h2>
+            <div className="w-24 h-0.5 bg-brand-black"></div>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                title: 'Light Package',
-                description: 'Quick essentials – Basic checks on exterior, tyres, battery, and odometer.',
+                title: 'Light',
+                description: 'Essential checks for quick decisions',
                 iconSrc: lightPackageIcon,
-                gradient: 'from-blue-600 to-cyan-600',
                 price: '₹2,999',
               },
               {
-                title: 'Elite Package',
-                description: 'Smart coverage – Adds engine bay, brakes, suspension, and road test.',
+                title: 'Elite',
+                description: 'Comprehensive coverage with road test',
                 iconSrc: elitePackageIcon,
-                gradient: 'from-purple-600 to-pink-600',
                 price: '₹4,999',
               },
               {
-                title: 'Ultimate Package',
-                description: '100+ point inspection, OBD scan, underbody check, accident analysis.',
+                title: 'Ultimate',
+                description: '100+ point diagnostic inspection',
                 iconSrc: ultimatePackageIcon,
-                gradient: 'from-orange-600 to-red-600',
                 price: '₹7,999',
+                popular: true,
               },
               {
-                title: 'Supreme Package',
-                description: 'Premium assurance with service history, document audit, and consultation.',
+                title: 'Supreme',
+                description: 'Complete assurance with consultation',
                 iconSrc: supremePackageIcon,
-                gradient: 'from-emerald-600 to-green-600',
                 price: '₹10,999',
               },
             ].map((service, index) => (
-              <div key={index} className="group bg-white p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md border border-gray-100 p-2">
-                  <img src={service.iconSrc} alt={service.title} className="w-full h-full object-contain drop-shadow-sm" />
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative bg-brand-cream p-8 hover:bg-white transition-all duration-300 border border-transparent hover:border-brand-black"
+              >
+                {service.popular && (
+                  <div className="absolute top-0 right-0 bg-brand-burgundy text-white px-4 py-1 text-xs font-bold tracking-wider">
+                    POPULAR
+                  </div>
+                )}
+                <div className="w-16 h-16 mb-6 opacity-80">
+                  <img src={service.iconSrc} alt={service.title} className="w-full h-full object-contain" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-gray-900">{service.title}</h3>
-                <div className="text-2xl md:text-3xl font-bold text-brand-burgundy mb-2 md:mb-3">{service.price}</div>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">{service.description}</p>
-              </div>
+                <h3 className="text-2xl font-bold text-brand-black mb-2">{service.title}</h3>
+                <div className="text-3xl font-bold text-brand-burgundy mb-4">{service.price}</div>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">{service.description}</p>
+                <button 
+                  onClick={() => navigate('/services')}
+                  className="text-brand-black text-sm font-semibold tracking-wide uppercase hover:text-brand-burgundy transition-colors inline-flex items-center gap-2 group"
+                >
+                  Learn More
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              </motion.div>
             ))}
-          </div>
-          <div className="text-center mt-12">
-            <button
-              onClick={() => navigate('/services')}
-              className="inline-flex items-center gap-2 text-brand-burgundy font-semibold hover:gap-4 transition-all duration-300 text-lg group"
-            >
-              View All Packages
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
           </div>
         </div>
       </section>
 
-      {/* Equipment Section */}
-      <section className="py-12 md:py-20 lg:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
-            <span className="text-brand-burgundy font-semibold text-xs sm:text-sm tracking-wider uppercase mb-3 block">Advanced Tools</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4 px-4">Professional Equipment</h2>
-            <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">State-of-the-art diagnostic tools for comprehensive vehicle inspection</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+      {/* Professional Equipment - Clean Grid */}
+      <section className="py-32 bg-brand-cream">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-20"
+          >
+            <span className="text-brand-burgundy text-sm font-semibold tracking-[0.2em] uppercase">Advanced Tools</span>
+            <h2 className="text-5xl lg:text-6xl font-bold text-brand-black mt-4 mb-6 tracking-tight">Professional Equipment</h2>
+            <div className="w-24 h-0.5 bg-brand-black"></div>
+          </motion.div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: 'OBD-II Scanner', desc: 'Engine health & error codes', iconSrc: obdScannerIcon },
-              { name: 'Paint Thickness Gauge', desc: 'Accident detection', iconSrc: paintGaugeIcon },
-              { name: 'Tyre Tread Depth Gauge', desc: 'Tyre wear assessment', iconSrc: treadGaugeIcon },
-              { name: 'Endoscopy Camera', desc: 'Hidden area inspection', iconSrc: endoscopyCameraIcon },
-              { name: 'Battery Tester', desc: 'Battery condition check', iconSrc: batteryTesterIcon },
-              { name: 'IR Thermometers', desc: 'Temperature diagnostics', iconSrc: irThermometerIcon },
-              { name: 'Underbody Mirror', desc: 'Rust & leak detection', iconSrc: underbodyMirrorIcon },
-              { name: 'VIN Tools', desc: 'Service record verification', iconSrc: vinToolsIcon },
+              { name: 'OBD Scanner', desc: 'Engine diagnostics', iconSrc: obdScannerIcon },
+              { name: 'Paint Gauge', desc: 'Accident detection', iconSrc: paintGaugeIcon },
+              { name: 'Tread Gauge', desc: 'Tire assessment', iconSrc: treadGaugeIcon },
+              { name: 'Endoscopy', desc: 'Hidden inspection', iconSrc: endoscopyCameraIcon },
+              { name: 'Battery Tester', desc: 'Power check', iconSrc: batteryTesterIcon },
+              { name: 'IR Thermometer', desc: 'Temperature scan', iconSrc: irThermometerIcon },
+              { name: 'Underbody Mirror', desc: 'Rust detection', iconSrc: underbodyMirrorIcon },
+              { name: 'VIN Tools', desc: 'History verification', iconSrc: vinToolsIcon },
             ].map((equipment, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-white p-4 md:p-6 rounded-xl border border-gray-200 hover:border-brand-burgundy/30 hover:shadow-lg transition-all duration-300">
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-lg flex items-center justify-center mb-3 p-3 shadow-sm border border-gray-100">
-                  <img src={equipment.iconSrc} alt={equipment.name} className="w-full h-full object-contain drop-shadow-sm" />
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="bg-white p-6 hover:shadow-lg transition-all duration-300 group"
+              >
+                <div className="w-12 h-12 mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
+                  <img src={equipment.iconSrc} alt={equipment.name} className="w-full h-full object-contain" />
                 </div>
-                <h3 className="font-bold text-sm md:text-base text-gray-900 mb-2">{equipment.name}</h3>
-                <p className="text-xs md:text-sm text-gray-600">{equipment.desc}</p>
-              </div>
+                <h3 className="font-bold text-brand-black text-sm mb-1">{equipment.name}</h3>
+                <p className="text-xs text-gray-500">{equipment.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-12 md:py-20 lg:py-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
-            <span className="text-brand-burgundy font-semibold text-xs sm:text-sm tracking-wider uppercase mb-3 block">How It Works</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4 px-4">Inspection Process</h2>
-            <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">Simple, transparent, and professional</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {/* Inspection Process - Minimal Timeline */}
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-20"
+          >
+            <span className="text-brand-burgundy text-sm font-semibold tracking-[0.2em] uppercase">How It Works</span>
+            <h2 className="text-5xl lg:text-6xl font-bold text-brand-black mt-4 mb-6 tracking-tight">Inspection Process</h2>
+            <div className="w-24 h-0.5 bg-brand-black"></div>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {[
               {
                 step: '01',
                 title: 'Booking',
-                description: 'Call us to schedule an appointment. Choose your package and make advance payment.',
-                Icon: Phone,
+                description: 'Schedule appointment and choose package',
               },
               {
                 step: '02',
                 title: 'Scheduling',
-                description: 'We contact the seller and schedule the inspection at their convenience.',
-                Icon: Calendar,
+                description: 'We coordinate with seller for inspection',
               },
               {
                 step: '03',
                 title: 'Inspection',
-                description: 'Our technician visits the site and conducts a thorough inspection (30-60 mins).',
-                Icon: Wrench,
+                description: 'Thorough on-site vehicle assessment',
               },
               {
                 step: '04',
                 title: 'Report',
-                description: 'Receive a comprehensive report with observations and expert consultation.',
-                Icon: FileText,
+                description: 'Comprehensive findings and consultation',
               },
             ].map((process, index) => (
-              <div key={index} className="relative">
-                <div className="bg-white p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                  <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-brand-burgundy to-brand-burgundy-dark rounded-xl flex items-center justify-center mb-3 md:mb-4">
-                    <process.Icon className="text-white" size={28} strokeWidth={2} />
-                  </div>
-                  <div className="text-brand-burgundy font-bold text-xs md:text-sm mb-2">STEP {process.step}</div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-gray-900">{process.title}</h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">{process.description}</p>
-                </div>
-                {index < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 text-brand-burgundy text-2xl">
-                    →
-                  </div>
-                )}
-              </div>
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative"
+              >
+                <div className="text-6xl font-bold text-brand-burgundy/100 mb-4">{process.step}</div>
+                <h3 className="text-2xl font-bold text-brand-black mb-3">{process.title}</h3>
+                <div className="w-12 h-0.5 bg-brand-burgundy mb-4"></div>
+                <p className="text-gray-600 text-sm leading-relaxed">{process.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-12 md:py-20 lg:py-24 bg-gradient-to-br from-brand-burgundy to-brand-burgundy-dark text-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10 md:mb-16">
-            <span className="text-brand-burgundy-light font-semibold text-xs sm:text-sm tracking-wider uppercase mb-3 block">Why Revelro</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 px-4">Why Choose Us</h2>
-            <p className="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">Protecting your investment with expertise and transparency</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {/* Why Choose Us - Minimal Feature Grid */}
+      <section className="py-32 bg-brand-cream">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-20"
+          >
+            <span className="text-brand-burgundy text-sm font-semibold tracking-[0.2em] uppercase">Why Revelro</span>
+            <h2 className="text-5xl lg:text-6xl font-bold text-brand-black mt-4 mb-6 tracking-tight">Why Choose Us</h2>
+            <div className="w-24 h-0.5 bg-brand-black"></div>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             {[
               {
                 title: 'Expert Technicians',
-                description: 'Trained automotive professionals with years of experience in vehicle inspection.',
+                description: 'Trained automotive professionals with years of experience',
                 Icon: UserCheck,
               },
               {
                 title: 'Advanced Equipment',
-                description: 'State-of-the-art diagnostic tools for accurate and comprehensive assessments.',
-                Icon: Cog,
+                description: 'State-of-the-art diagnostic tools for accurate assessments',
+                Icon: Wrench,
               },
               {
                 title: 'Transparent Reports',
-                description: 'Detailed inspection reports with clear findings and expert recommendations.',
+                description: 'Detailed findings with expert recommendations',
                 Icon: FileCheck,
               },
               {
                 title: 'Service History',
-                description: 'Access to company service records for almost all brands available in India.',
+                description: 'Access to records for almost all brands in India',
                 Icon: BookOpen,
               },
               {
                 title: 'Flexible Packages',
-                description: 'Four different packages tailored to match your needs and budget.',
+                description: 'Four packages tailored to your needs and budget',
                 Icon: Package,
               },
               {
                 title: 'Peace of Mind',
-                description: 'Make informed decisions and avoid costly repairs with our thorough inspections.',
+                description: 'Make informed decisions and avoid costly repairs',
                 Icon: CheckCircle,
               },
             ].map((feature, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300">
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-white/20 rounded-xl flex items-center justify-center mb-3 md:mb-4">
-                  <feature.Icon className="text-white" size={24} strokeWidth={2} />
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group"
+              >
+                <div className="w-12 h-12 mb-6 text-brand-burgundy">
+                  <feature.Icon size={48} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3">{feature.title}</h3>
-                <p className="text-sm md:text-base text-gray-200 leading-relaxed">{feature.description}</p>
-              </div>
+                <h3 className="text-2xl font-bold text-brand-black mb-3">{feature.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-12 md:py-20 lg:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 text-center text-white shadow-2xl">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 px-2">Ready to Inspect Your Next Car?</h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-10 max-w-2xl mx-auto px-2">
+      {/* CTA Section - Bold & Minimal */}
+      <section className="py-32 bg-brand-black text-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl"
+          >
+            <h2 className="text-5xl lg:text-7xl font-bold mb-8 tracking-tight leading-tight">
+              Ready to Inspect<br />Your Next Car?
+            </h2>
+            <div className="w-24 h-0.5 bg-brand-burgundy mb-8"></div>
+            <p className="text-xl text-gray-400 mb-12 max-w-2xl">
               Don't take chances with your investment. Book a professional inspection today.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => navigate('/contact')}
-                className="bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-brand-burgundy/50 transform hover:-translate-y-0.5 text-sm sm:text-base"
+                className="bg-brand-burgundy text-white px-10 py-5 text-sm font-semibold tracking-wide uppercase hover:bg-brand-burgundy-dark transition-all duration-300"
               >
-                Book Now
+                Book Inspection
               </button>
               <button
                 onClick={() => navigate('/services')}
-                className="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 px-6 sm:px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-white/50 transform hover:-translate-y-0.5 text-sm sm:text-base"
+                className="border-2 border-white text-white px-10 py-5 text-sm font-semibold tracking-wide uppercase hover:bg-white hover:text-brand-black transition-all duration-300"
               >
                 View Packages
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

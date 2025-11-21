@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { MapPin, Mail, Phone, Clock, Send } from '../components/icons';
+import { motion } from 'framer-motion';
+import { MapPin, Mail, Phone, Clock } from '../components/icons';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -112,33 +113,50 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="bg-brand-cream-dark">
+    <div className="bg-white">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-4 text-center">
-          <span className="inline-block mb-3 md:mb-4 px-3 md:px-4 py-2 bg-brand-burgundy/20 backdrop-blur-sm border border-brand-burgundy/30 rounded-full text-brand-burgundy-light font-semibold text-xs sm:text-sm tracking-wider uppercase">Get In Touch</span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 px-2">Contact Us</h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-            Ready to book a pre-owned car inspection? Have questions? We're here to help.
-          </p>
+      <section className="bg-brand-cream py-32">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl"
+          >
+            <span className="text-brand-burgundy text-sm font-semibold tracking-[0.2em] uppercase">Get In Touch</span>
+            <h1 className="text-6xl lg:text-7xl font-bold text-brand-black mt-4 mb-6 tracking-tight leading-tight">
+              Contact<br />Us
+            </h1>
+            <div className="w-24 h-0.5 bg-brand-black mb-8"></div>
+            <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
+              Ready to book a pre-owned car inspection? Have questions? We're here to help.
+            </p>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
       {/* Contact Content */}
-      <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+      <section className="py-32">
+        <div className="container mx-auto px-6 lg:px-12">
+        <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
-          <div className="bg-brand-cream p-6 sm:p-8 md:p-10 rounded-xl md:rounded-2xl shadow-xl border border-gray-200">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-gray-900">Send us a Message</h2>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="bg-brand-cream p-10"
+          >
+            <h2 className="text-3xl font-bold mb-8 text-brand-black">Send Message</h2>
             {submitError && (
               <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6">
                 <p className="font-semibold">Error:</p>
                 <p>{submitError}</p>
               </div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                   Full Name *
                 </label>
                 <input
@@ -147,16 +165,16 @@ export default function ContactPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none bg-white"
                   required
                   placeholder="John Doe"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+              <div className="grid sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email Address *
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email *
                   </label>
                   <input
                     type="email"
@@ -164,14 +182,14 @@ export default function ContactPage() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none bg-white"
                     required
                     placeholder="john@example.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Phone Number
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone
                   </label>
                   <input
                     type="tel"
@@ -179,22 +197,22 @@ export default function ContactPage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none bg-white"
                     placeholder="+91 98911 11747"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Service Interested In
+                <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                  Service
                 </label>
                 <select
                   id="service"
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none bg-brand-cream"
+                  className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none bg-white"
                 >
                   <option value="">Select a service</option>
                   {services.map((service, index) => (
@@ -206,98 +224,75 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Your Message *
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  Message *
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={4}
+                  rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy transition-all duration-200 outline-none resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none resize-none bg-white"
                   required
-                  placeholder="Tell us about the car you want to inspect and which package you're interested in..."
+                  placeholder="Tell us about your inspection needs..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-brand-burgundy/30 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                className="w-full bg-brand-black text-white py-4 px-6 text-sm font-semibold tracking-wide uppercase hover:bg-brand-burgundy transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span>Sending...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    <span>Send Message</span>
-                  </>
-                )}
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 text-gray-900">Get in Touch</h2>
-            <p className="text-gray-600 mb-6 md:mb-10 text-sm sm:text-base md:text-lg leading-relaxed">
-              Want to schedule an inspection or have questions about our packages? Fill out the form or contact us directly using the information below.
-            </p>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl font-bold mb-8 text-brand-black">Contact Information</h2>
 
-            <div className="space-y-3 md:space-y-5">
+            <div className="space-y-6">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-start space-x-3 md:space-x-4 p-4 md:p-5 bg-gradient-to-br from-brand-cream-dark to-brand-cream rounded-lg md:rounded-xl border border-gray-200 hover:shadow-md transition-all duration-200">
-                  <div className="flex-shrink-0 mt-1 p-2 md:p-3 bg-brand-burgundy/10 rounded-lg">
+                <div key={index} className="flex items-start gap-4">
+                  <div className="flex-shrink-0 mt-1">
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm md:text-base text-gray-900 mb-1">{item.title}</h3>
-                    <p className="text-xs sm:text-sm md:text-base text-gray-600">{item.details}</p>
+                    <h3 className="font-semibold text-brand-black mb-1">{item.title}</h3>
+                    <p className="text-sm text-gray-600">{item.details}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 md:mt-12 bg-gradient-to-br from-brand-burgundy/5 to-brand-burgundy/10 p-6 md:p-8 rounded-xl md:rounded-2xl border border-brand-burgundy/20 shadow-lg">
-              <h3 className="font-bold text-lg md:text-xl mb-4 md:mb-5 text-gray-900">Company Information</h3>
-              <div className="space-y-2 md:space-y-3">
-                <div className="py-2">
-                  <span className="text-xs sm:text-sm text-gray-700 font-medium block mb-1">Company Name</span>
-                  <span className="text-sm sm:text-base font-bold text-gray-900">Revelro Cars Private Limited</span>
+            <div className="mt-12 pt-12 border-t border-gray-200">
+              <h3 className="text-xl font-bold text-brand-black mb-6">Company Details</h3>
+              <div className="space-y-4 text-sm">
+                <div>
+                  <span className="text-gray-500 block mb-1">Company Name</span>
+                  <span className="font-semibold text-brand-black">Revelro Cars Private Limited</span>
                 </div>
-                <div className="py-2 border-t border-brand-burgundy/20">
-                  <span className="text-xs sm:text-sm text-gray-700 font-medium block mb-1">Tagline</span>
-                  <span className="text-sm sm:text-base font-bold text-gray-900">Quality, Efficiency, Reliability and Satisfaction</span>
+                <div>
+                  <span className="text-gray-500 block mb-1">Tagline</span>
+                  <span className="font-semibold text-brand-black">Quality, Efficiency, Reliability and Satisfaction</span>
                 </div>
-                <div className="py-2 border-t border-brand-burgundy/20">
-                  <span className="text-xs sm:text-sm text-gray-700 font-medium block mb-1">Service Coverage</span>
-                  <span className="text-sm sm:text-base font-bold text-gray-900">Service records for almost all brands in India</span>
+                <div>
+                  <span className="text-gray-500 block mb-1">Service Coverage</span>
+                  <span className="font-semibold text-brand-black">Service records for almost all brands in India</span>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
-
-      {/* Map */}
-      {/* <div className="h-96 w-full bg-gray-200">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.715619761724!2d72.8341!3d19.0759837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7f1890c3c1b%3A0x6a4a6e8e0b8a6a6e8!2sMumbai%2C%20Maharashtra%2C%20India!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          title="Our Location"
-        ></iframe>
-      </div> */}
+        </div>
+      </section>
     </div>
   );
 }

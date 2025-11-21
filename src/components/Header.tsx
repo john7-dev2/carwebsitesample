@@ -1,4 +1,4 @@
-import { Phone, Menu, X } from './icons';
+import { Menu, X } from './icons';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import revelroLogo from '../assets/Revelro_Logo.png';
@@ -10,46 +10,47 @@ export default function Header() {
   const navItems = [
     { id: '/', label: 'Home' },
     { id: '/services', label: 'Services' },
-    { id: '/about', label: 'About Us' },
+    { id: '/about', label: 'About' },
     { id: '/contact', label: 'Contact' },
   ];
 
   return (
-    <header className="bg-brand-cream/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-200">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 md:h-20 lg:h-24">
+    <header className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="flex items-center justify-between h-24">
+          {/* Logo */}
           <Link to="/" className="flex items-center cursor-pointer group">
-            <img src={revelroLogo} alt="Revelro Cars" className="h-24 sm:h-24 md:h-28 lg:h-36 w-auto transition-transform duration-300 group-hover:scale-105" />
+            <img src={revelroLogo} alt="Revelro Cars" className="h-56 w-auto transition-opacity duration-300 group-hover:opacity-80" />
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-1">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.id}
                 to={item.id}
-                className={`px-4 py-2 rounded-lg text-gray-700 hover:text-brand-burgundy hover:bg-brand-burgundy/5 transition-all duration-200 font-medium relative ${
-                  location.pathname === item.id ? 'text-brand-burgundy bg-brand-burgundy/5' : ''
+                className={`text-sm font-medium tracking-wide uppercase transition-colors duration-200 ${
+                  location.pathname === item.id 
+                    ? 'text-brand-burgundy' 
+                    : 'text-brand-black hover:text-brand-burgundy'
                 }`}
               >
                 {item.label}
-                {location.pathname === item.id && (
-                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-brand-burgundy rounded-full"></span>
-                )}
               </Link>
             ))}
           </nav>
 
-          <a
-            href="tel:+919891111747"
-            className="hidden md:flex items-center gap-2 bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark hover:from-brand-burgundy-dark hover:to-brand-black text-white px-4 md:px-6 py-2 md:py-3 rounded-xl font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-brand-burgundy/30 transform hover:-translate-y-0.5 text-sm md:text-base"
+          {/* CTA Button */}
+          <Link
+            to="/services"
+            className="hidden md:block bg-brand-black text-white px-6 py-3 text-xs font-semibold tracking-wider uppercase hover:bg-brand-burgundy transition-all duration-300"
           >
-            <Phone size={18} className="md:w-5 md:h-5" />
-            <span className="hidden lg:inline">+91 989 1111 747</span>
-            <span className="lg:hidden">Call Us</span>
-          </a>
+            Book Now
+          </Link>
 
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700 p-2"
+            className="md:hidden text-brand-black p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -57,28 +58,31 @@ export default function Header() {
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-3 border-t border-gray-200 bg-brand-cream/95 backdrop-blur-md">
-            <nav className="flex flex-col space-y-1">
+          <div className="md:hidden py-6 border-t border-gray-100">
+            <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <Link
                   key={item.id}
                   to={item.id}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-left text-gray-700 hover:text-brand-burgundy hover:bg-brand-burgundy/5 transition-all duration-200 font-medium px-4 py-2.5 rounded-lg mx-2 text-sm ${
-                    location.pathname === item.id ? 'text-brand-burgundy bg-brand-burgundy/5' : ''
+                  className={`text-sm font-medium tracking-wide uppercase transition-colors ${
+                    location.pathname === item.id 
+                      ? 'text-brand-burgundy' 
+                      : 'text-brand-black hover:text-brand-burgundy'
                   }`}
                 >
                   {item.label}
                 </Link>
               ))}
-              <a
-                href="tel:+919891111747"
-                className="flex items-center justify-center gap-2 bg-gradient-to-r from-brand-burgundy to-brand-burgundy-dark text-white px-4 py-2.5 rounded-xl font-semibold mx-4 mt-2 shadow-md text-sm"
+              <Link
+                to="/services"
+                onClick={() => setMobileMenuOpen(false)}
+                className="bg-brand-black text-white px-6 py-3 text-xs font-semibold tracking-wider uppercase text-center mt-4"
               >
-                <Phone size={18} />
-                +91 989 1111 747
-              </a>
+                Book Now
+              </Link>
             </nav>
           </div>
         )}
