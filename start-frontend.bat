@@ -1,0 +1,3 @@
+@echo off
+echo Starting Revelro Frontend (Vite)...
+npm run dev

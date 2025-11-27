@@ -20,6 +20,7 @@ export default function Footer() {
               {[
                 { to: '/', label: 'Home' },
                 { to: '/services', label: 'Services' },
+                { to: '/vehicle-history', label: 'Vehicle History' },
                 { to: '/about', label: 'About' },
                 { to: '/contact', label: 'Contact' },
               ].map((link) => (

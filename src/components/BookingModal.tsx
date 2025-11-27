@@ -26,11 +26,10 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const services = [
-    'Exterior Detailing',
-    'Interior Detailing',
-    'Ceramic Coating',
-    'Paint Correction',
-    'Full Detailing Package',
+    'Light Package',
+    'Elite Package',
+    'Ultimate Package',
+    'Supreme Package',
     'Other',
   ];
 
