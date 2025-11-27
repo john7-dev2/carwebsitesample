@@ -3,14 +3,34 @@ import cors from 'cors';
 import { parseStringPromise } from 'xml2js';
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // RegCheck API credentials
-const REGCHECK_USERNAME = 'jou1';
+const REGCHECK_USERNAME = process.env.REGCHECK_USERNAME || 'jou1';
 const REGCHECK_API_URL = 'https://www.regcheck.org.uk/api/reg.asmx';
 
+// Allowed origins for CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://carwebsitesample.vercel.app',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Health check endpoint
