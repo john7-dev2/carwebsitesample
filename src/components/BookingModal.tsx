@@ -1,6 +1,146 @@
 import { useState } from 'react';
 import { X } from './icons';
 
+// Car database with popular Indian car models
+const carDatabase = {
+  'Maruti Suzuki': {
+    models: ['Alto', 'Alto K10', 'S-Presso', 'WagonR', 'Celerio', 'Swift', 'Dzire', 'Baleno', 'Ignis', 'Ertiga', 'XL6', 'Vitara Brezza', 'S-Cross', 'Ciaz', 'Grand Vitara'],
+    variants: {
+      'Alto': ['STD', 'LX', 'LXI', 'VXI'],
+      'Alto K10': ['LXI', 'VXI', 'VXI+'],
+      'S-Presso': ['STD', 'LXI', 'VXI', 'VXI+'],
+      'WagonR': ['LXI', 'VXI', 'ZXI', 'ZXI+'],
+      'Celerio': ['LXI', 'VXI', 'ZXI', 'ZXI+'],
+      'Swift': ['LXI', 'VXI', 'ZXI', 'ZXI+'],
+      'Dzire': ['LXI', 'VXI', 'ZXI', 'ZXI+'],
+      'Baleno': ['Sigma', 'Delta', 'Zeta', 'Alpha'],
+      'Ignis': ['Sigma', 'Delta', 'Zeta', 'Alpha'],
+      'Ertiga': ['LXI', 'VXI', 'ZXI', 'ZXI+'],
+      'XL6': ['Zeta', 'Alpha'],
+      'Vitara Brezza': ['LXI', 'VXI', 'ZXI', 'ZXI+'],
+      'S-Cross': ['Sigma', 'Delta', 'Zeta', 'Alpha'],
+      'Ciaz': ['Sigma', 'Delta', 'Zeta', 'Alpha'],
+      'Grand Vitara': ['Sigma', 'Delta', 'Zeta', 'Alpha'],
+    }
+  },
+  'Hyundai': {
+    models: ['Santro', 'Grand i10 Nios', 'i20', 'i20 N Line', 'Aura', 'Venue', 'Verna', 'Creta', 'Alcazar', 'Tucson', 'Exter'],
+    variants: {
+      'Santro': ['D-Lite', 'Era', 'Magna', 'Sportz', 'Asta'],
+      'Grand i10 Nios': ['Era', 'Magna', 'Sportz', 'Asta'],
+      'i20': ['Magna', 'Sportz', 'Asta', 'Asta(O)'],
+      'i20 N Line': ['N6', 'N8', 'N10'],
+      'Aura': ['E', 'S', 'SX', 'SX+', 'SX(O)'],
+      'Venue': ['E', 'S', 'SX', 'SX+', 'SX(O)'],
+      'Verna': ['E', 'EX', 'S', 'SX', 'SX(O)'],
+      'Creta': ['E', 'EX', 'S', 'SX', 'SX(O)'],
+      'Alcazar': ['Prestige', 'Platinum', 'Signature'],
+      'Tucson': ['Platinum', 'Signature'],
+      'Exter': ['EX', 'S', 'SX', 'SX(O)'],
+    }
+  },
+  'Tata': {
+    models: ['Tiago', 'Tigor', 'Altroz', 'Punch', 'Nexon', 'Harrier', 'Safari', 'Tigor EV', 'Nexon EV'],
+    variants: {
+      'Tiago': ['XE', 'XM', 'XT', 'XZ', 'XZ+'],
+      'Tigor': ['XE', 'XM', 'XT', 'XZ', 'XZ+'],
+      'Altroz': ['XE', 'XM', 'XM+', 'XT', 'XZ', 'XZ+'],
+      'Punch': ['Pure', 'Adventure', 'Accomplished', 'Creative', 'Creative+'],
+      'Nexon': ['XE', 'XM', 'XZ', 'XZ+', 'XZ+ (O)'],
+      'Harrier': ['XE', 'XM', 'XT', 'XZ', 'XZ+'],
+      'Safari': ['XE', 'XM', 'XT', 'XZ', 'XZ+'],
+      'Tigor EV': ['XE', 'XM', 'XZ+', 'XZ+ LUX'],
+      'Nexon EV': ['XM', 'XZ+', 'XZ+ LUX', 'Max'],
+    }
+  },
+  'Mahindra': {
+    models: ['KUV100', 'XUV300', 'Bolero', 'Scorpio', 'Scorpio-N', 'XUV700', 'Thar', 'XUV400'],
+    variants: {
+      'KUV100': ['K2', 'K4', 'K6', 'K8'],
+      'XUV300': ['W4', 'W6', 'W8', 'W8(O)'],
+      'Bolero': ['B4', 'B6', 'B6(O)'],
+      'Scorpio': ['S3', 'S5', 'S7', 'S9', 'S11'],
+      'Scorpio-N': ['Z2', 'Z4', 'Z6', 'Z8', 'Z8 L'],
+      'XUV700': ['MX', 'AX3', 'AX5', 'AX7', 'AX7 L'],
+      'Thar': ['AX', 'AX OPT', 'LX'],
+      'XUV400': ['EC', 'EL', 'EO'],
+    }
+  },
+  'Honda': {
+    models: ['Amaze', 'Jazz', 'City', 'City Hybrid', 'Elevate'],
+    variants: {
+      'Amaze': ['E', 'S', 'V', 'VX'],
+      'Jazz': ['V', 'VX'],
+      'City': ['SV', 'V', 'VX', 'ZX'],
+      'City Hybrid': ['V', 'VX', 'ZX'],
+      'Elevate': ['SV', 'V', 'VX', 'ZX'],
+    }
+  },
+  'Toyota': {
+    models: ['Glanza', 'Urban Cruiser Hyryder', 'Innova Crysta', 'Innova Hycross', 'Fortuner', 'Hilux', 'Camry', 'Vellfire'],
+    variants: {
+      'Glanza': ['E', 'S', 'G'],
+      'Urban Cruiser Hyryder': ['E', 'S', 'G', 'V'],
+      'Innova Crysta': ['GX', 'VX', 'ZX'],
+      'Innova Hycross': ['GX', 'GX(O)', 'VX', 'VX(O)', 'ZX', 'ZX(O)'],
+      'Fortuner': ['4x2 MT', '4x2 AT', '4x4 MT', '4x4 AT'],
+      'Hilux': ['STD', 'High'],
+      'Camry': ['Hybrid'],
+      'Vellfire': ['Executive Lounge'],
+    }
+  },
+  'Kia': {
+    models: ['Sonet', 'Seltos', 'Carens', 'EV6'],
+    variants: {
+      'Sonet': ['HTE', 'HTK', 'HTX', 'GTX', 'GTX+', 'X-Line'],
+      'Seltos': ['HTE', 'HTK', 'HTK+', 'HTX', 'GTX', 'GTX+', 'X-Line'],
+      'Carens': ['Premium', 'Prestige', 'Prestige Plus', 'Luxury', 'Luxury Plus'],
+      'EV6': ['GT-Line'],
+    }
+  },
+  'MG': {
+    models: ['Comet EV', 'ZS EV', 'Astor', 'Hector', 'Hector Plus', 'Gloster'],
+    variants: {
+      'Comet EV': ['Excite', 'Exclusive', 'Plush'],
+      'ZS EV': ['Excite', 'Exclusive', 'Essence'],
+      'Astor': ['Style', 'Super', 'Smart', 'Sharp', 'Savvy'],
+      'Hector': ['Style', 'Super', 'Smart', 'Sharp', 'Savvy'],
+      'Hector Plus': ['Style', 'Super', 'Smart', 'Sharp', 'Savvy'],
+      'Gloster': ['Super', 'Smart', 'Sharp', 'Savvy'],
+    }
+  },
+  'Renault': {
+    models: ['Kwid', 'Triber', 'Kiger'],
+    variants: {
+      'Kwid': ['RXE', 'RXL', 'RXT', 'Climber'],
+      'Triber': ['RXE', 'RXL', 'RXT', 'RXZ'],
+      'Kiger': ['RXE', 'RXL', 'RXT', 'RXZ'],
+    }
+  },
+  'Nissan': {
+    models: ['Magnite'],
+    variants: {
+      'Magnite': ['XE', 'XL', 'XV', 'XV Premium', 'Turbo XV', 'Turbo XV Premium'],
+    }
+  },
+  'Volkswagen': {
+    models: ['Polo', 'Vento', 'Taigun', 'Virtus'],
+    variants: {
+      'Polo': ['Trendline', 'Comfortline', 'Highline', 'GT'],
+      'Vento': ['Trendline', 'Comfortline', 'Highline'],
+      'Taigun': ['Topline', 'Highline', 'Highline Plus', 'GT'],
+      'Virtus': ['Comfortline', 'Highline', 'Topline', 'GT'],
+    }
+  },
+  'Skoda': {
+    models: ['Kushaq', 'Slavia'],
+    variants: {
+      'Kushaq': ['Active', 'Ambition', 'Style', 'Monte Carlo'],
+      'Slavia': ['Active', 'Ambition', 'Style', 'Monte Carlo'],
+    }
+  },
+};
+
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -15,11 +155,17 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
     service_type: selectedService,
     car_make: '',
     car_model: '',
+    car_variant: '',
     car_year: '',
     preferred_date: '',
     preferred_time: '',
     additional_notes: '',
   });
+
+  // Dropdown state management
+  const [selectedMake, setSelectedMake] = useState('');
+  const [selectedModel, setSelectedModel] = useState('');
+  const [selectedVariant, setSelectedVariant] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
@@ -46,11 +192,59 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
     '6:00 PM - 7:00 PM',
   ];
 
+  // Get available models based on selected make
+  const availableModels = selectedMake && carDatabase[selectedMake as keyof typeof carDatabase] 
+    ? carDatabase[selectedMake as keyof typeof carDatabase].models 
+    : [];
+  
+  // Get available variants based on selected make and model
+  const getAvailableVariants = (): string[] => {
+    if (!selectedMake || !selectedModel) return [];
+    const makeData = carDatabase[selectedMake as keyof typeof carDatabase];
+    if (!makeData || !makeData.variants) return [];
+    const variants = (makeData.variants as any)[selectedModel];
+    return variants || [];
+  };
+  const availableVariants = getAvailableVariants();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  };
+
+  const handleMakeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const make = e.target.value;
+    setSelectedMake(make);
+    setSelectedModel('');
+    setSelectedVariant('');
+    setFormData(prev => ({
+      ...prev,
+      car_make: make,
+      car_model: '',
+      car_variant: ''
+    }));
+  };
+
+  const handleModelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const model = e.target.value;
+    setSelectedModel(model);
+    setSelectedVariant('');
+    setFormData(prev => ({
+      ...prev,
+      car_model: model,
+      car_variant: ''
+    }));
+  };
+
+  const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const variant = e.target.value;
+    setSelectedVariant(variant);
+    setFormData(prev => ({
+      ...prev,
+      car_variant: variant
     }));
   };
 
@@ -70,6 +264,9 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
       message += `*Vehicle Details:*\n`;
       message += `Make: ${formData.car_make}\n`;
       message += `Model: ${formData.car_model}\n`;
+      if (formData.car_variant) {
+        message += `Variant: ${formData.car_variant}\n`;
+      }
       if (formData.car_year) {
         message += `Year: ${formData.car_year}\n`;
       }
@@ -113,11 +310,15 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
           service_type: '',
           car_make: '',
           car_model: '',
+          car_variant: '',
           car_year: '',
           preferred_date: '',
           preferred_time: '',
           additional_notes: '',
         });
+        setSelectedMake('');
+        setSelectedModel('');
+        setSelectedVariant('');
       }, 3000);
     } catch (error) {
       console.error('Error booking appointment:', error);
@@ -231,36 +432,61 @@ export default function BookingModal({ isOpen, onClose, selectedService = '' }: 
           <div className="space-y-6 pt-12 border-t border-gray-200">
             <h3 className="text-2xl font-bold text-brand-black">Vehicle Information</h3>
             
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="car_make" className="block text-sm font-medium text-gray-700 mb-2">
                   Make *
                 </label>
-                <input
-                  type="text"
+                <select
                   id="car_make"
                   name="car_make"
-                  value={formData.car_make}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none"
+                  value={selectedMake}
+                  onChange={handleMakeChange}
+                  className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none bg-white"
                   required
-                  placeholder="Toyota"
-                />
+                >
+                  <option value="">Select Car Brand</option>
+                  {Object.keys(carDatabase).map((make) => (
+                    <option key={make} value={make}>{make}</option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label htmlFor="car_model" className="block text-sm font-medium text-gray-700 mb-2">
                   Model *
                 </label>
-                <input
-                  type="text"
+                <select
                   id="car_model"
                   name="car_model"
-                  value={formData.car_model}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none"
+                  value={selectedModel}
+                  onChange={handleModelChange}
+                  disabled={!selectedMake}
+                  className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                   required
-                  placeholder="Camry"
-                />
+                >
+                  <option value="">Select Car Model</option>
+                  {availableModels.map((model) => (
+                    <option key={model} value={model}>{model}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="car_variant" className="block text-sm font-medium text-gray-700 mb-2">
+                  Variant
+                </label>
+                <select
+                  id="car_variant"
+                  name="car_variant"
+                  value={selectedVariant}
+                  onChange={handleVariantChange}
+                  disabled={!selectedModel || availableVariants.length === 0}
+                  className="w-full px-4 py-3 border border-gray-300 focus:border-brand-black focus:ring-1 focus:ring-brand-black transition-all outline-none bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                >
+                  <option value="">Select Variant (Optional)</option>
+                  {availableVariants.map((variant: string) => (
+                    <option key={variant} value={variant}>{variant}</option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label htmlFor="car_year" className="block text-sm font-medium text-gray-700 mb-2">
