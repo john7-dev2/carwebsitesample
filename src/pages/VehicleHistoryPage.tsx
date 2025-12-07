@@ -144,7 +144,7 @@ const carDatabase = {
 
 export default function VehicleHistoryPage() {
   const navigate = useNavigate();
-  const [vehicleNumber] = useState('KL03Y1954');
+  const [vehicleNumber, setVehicleNumber] = useState('');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const sampleReportRef = useRef<HTMLDivElement | null>(null);
   
@@ -224,17 +224,18 @@ export default function VehicleHistoryPage() {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-burgundy to-red-600"></div>
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-brand-black mb-3">Enter Vehicle Details</h2>
-              <p className="text-sm text-gray-700 mb-1">
-                Registration Number: <span className="font-bold text-brand-burgundy">{vehicleNumber}</span>
-              </p>
               <p className="text-sm text-gray-600">Please fill in the vehicle information below to proceed with the report.</p>
             </div>
 
             <form onSubmit={(e) => {
               e.preventDefault();
+              if (!vehicleNumber.trim()) {
+                alert('Please enter the vehicle registration number');
+                return;
+              }
               const formData = new FormData(e.currentTarget);
               const manualData = {
-                vehicleNo: vehicleNumber,
+                vehicleNo: vehicleNumber.trim().toUpperCase(),
                 Description: formData.get('description') as string,
                 CarMake: formData.get('make') as string,
                 CarModel: formData.get('model') as string,
@@ -245,7 +246,7 @@ export default function VehicleHistoryPage() {
               
               navigate('/vehicle-checkout', {
                 state: {
-                  vehicleNumber: vehicleNumber,
+                  vehicleNumber: vehicleNumber.trim().toUpperCase(),
                   vehicleData: manualData,
                   timestamp: new Date().toISOString()
                 }
@@ -253,6 +254,21 @@ export default function VehicleHistoryPage() {
             }} className="space-y-5">
               <input type="hidden" name="description" value={selectedMake && selectedModel ? `${selectedMake} ${selectedModel}${selectedVariant ? ' ' + selectedVariant : ''}` : ''} />
               <div className="space-y-4">
+                <div>
+                  <label htmlFor="vehicleNumber" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Vehicle Registration Number *
+                  </label>
+                  <input
+                    type="text"
+                    id="vehicleNumber"
+                    name="vehicleNumber"
+                    required
+                    value={vehicleNumber}
+                    onChange={(e) => setVehicleNumber(e.target.value.toUpperCase())}
+                    placeholder="e.g., DL01A1234"
+                    className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-burgundy focus:border-brand-burgundy uppercase"
+                  />
+                </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2">
                     <label htmlFor="make" className="block text-sm font-semibold text-gray-700 mb-2">
